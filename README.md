@@ -1,46 +1,36 @@
-# Astro Starter Kit: Basics
+# AiTrava · Landing
 
-```sh
-npm create astro@latest -- --template basics
-```
+Landing page de AiTrava, viajes sorpresa personalizados. Hecha con [Astro](https://astro.build).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Comandos
 
-## 🚀 Project Structure
+| Comando           | Acción                                |
+| :---------------- | :------------------------------------ |
+| `npm install`     | Instala dependencias                  |
+| `npm run dev`     | Servidor local en `localhost:4321`    |
+| `npm run build`   | Genera el sitio estático en `./dist/` |
+| `npm run preview` | Sirve el build localmente             |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── assets/            Logo (optimizado con astro:assets)
+├── components/        Una sección de la landing por componente
+├── data/site.ts       Textos, links, redes y presupuesto de ejemplo
+├── layouts/           HTML base, SEO y fuentes
+├── pages/index.astro
+└── styles/global.css  Tokens de color (docs/desgin.txt) y utilidades
+design/                Fuentes del diseño (canvas)
+docs/                  Modelo de negocio, paleta y logo
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Las fuentes (Big Shoulders, Familjen Grotesk, IBM Plex Mono) se descargan en el build y se sirven desde el propio sitio con la API de fuentes de Astro.
 
-## 🧞 Commands
+## Despliegue
 
-All commands are run from the root of the project, from a terminal:
+Se despliega en Cloudflare Workers como sitio estático (`wrangler.jsonc` sirve `./dist`). Build: `npm run build`, deploy: `npx wrangler deploy`.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Pendiente
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Links de App Store y Google Play en `src/data/site.ts` (`stores`).

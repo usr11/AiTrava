@@ -1,0 +1,9 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "aitrava",
+	"compatibility_date": "2026-09-16",
+	// Sitio 100% estático: Cloudflare sirve lo que genera `npm run build`.
+	"assets": {
+		"directory": "./dist"
+	}
+}

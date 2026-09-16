@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Canvas de diseño generado (se reconstruye desde design/*.dc.html)
+design/aitrava-landing.html
+
+# Cloudflare
+.wrangler/
