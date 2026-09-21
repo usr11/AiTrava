@@ -7,12 +7,20 @@ interface Props {
 	size?: 'md' | 'lg';
 	arrow?: boolean;
 	class?: string;
+	/** Evento del Meta Pixel que se envía al hacer clic (p. ej. 'Lead'). `label` identifica qué botón fue. */
+	track?: { event: string; label: string; custom?: boolean };
 }
 
-const { href, variant = 'primary', size = 'md', arrow = false, class: className } = Astro.props;
+const { href, variant = 'primary', size = 'md', arrow = false, class: className, track } = Astro.props;
 ---
 
-<a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}>
+<a
+	href={href}
+	class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}
+	data-meta-event={track?.event}
+	data-meta-label={track?.label}
+	data-meta-custom={track?.custom ? '' : undefined}
+>
 	<slot />
 	{arrow && <Icon name="arrow" size={size === 'lg' ? 20 : 18} strokeWidth={2.2} class="btn__arrow" />}
 </a>

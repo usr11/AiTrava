@@ -19,10 +19,20 @@ import Button from './Button.astro';
 			<h2 id="cta-title" class="display cta__title">¿A dónde<br />vas?</h2>
 			<p class="cta__text">Ni idea. Ese es el plan.</p>
 			<div class="cta__actions">
-				<Button href={site.stores.appStore} variant="dark" size="lg" arrow>Planear mi sorpresa</Button>
+				<Button href={site.stores.appStore} variant="dark" size="lg" arrow track={{ event: 'Lead', label: 'cta-final' }}>Planear mi sorpresa</Button>
 				<div class="cta__stores">
-					<Button href={site.stores.appStore} variant="outline" size="lg">App Store</Button>
-					<Button href={site.stores.googlePlay} variant="outline" size="lg">Google Play</Button>
+					<Button
+						href={site.stores.appStore}
+						variant="outline"
+						size="lg"
+						track={{ event: 'ClickTienda', label: 'app-store', custom: true }}
+					>App Store</Button>
+					<Button
+						href={site.stores.googlePlay}
+						variant="outline"
+						size="lg"
+						track={{ event: 'ClickTienda', label: 'google-play', custom: true }}
+					>Google Play</Button>
 				</div>
 			</div>
 		</div>
