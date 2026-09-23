@@ -19,25 +19,57 @@ import Button from './Button.astro';
 			<h2 id="cta-title" class="display cta__title">¿A dónde<br />vas?</h2>
 			<p class="cta__text">Ni idea. Ese es el plan.</p>
 			<div class="cta__actions">
-				<Button href={site.stores.appStore} variant="dark" size="lg" arrow track={{ event: 'Lead', label: 'cta-final' }}>Planear mi sorpresa</Button>
+				<Button href={site.appUrl} variant="dark" size="lg" arrow track={{ event: 'Lead', label: 'cta-final' }}>Planear mi sorpresa</Button>
 				<div class="cta__stores">
 					<Button
 						href={site.stores.appStore}
 						variant="outline"
 						size="lg"
 						track={{ event: 'ClickTienda', label: 'app-store', custom: true }}
+						data-app-soon
 					>App Store</Button>
 					<Button
 						href={site.stores.googlePlay}
 						variant="outline"
 						size="lg"
 						track={{ event: 'ClickTienda', label: 'google-play', custom: true }}
+						data-app-soon
 					>Google Play</Button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<dialog class="soon" aria-labelledby="soon-title">
+		<p class="eyebrow soon__eyebrow">Próximamente</p>
+		<h3 id="soon-title" class="soon__title">La app móvil está en proceso</h3>
+		<p class="soon__text">
+			Estamos terminando AiTrava para iOS y Android. Mientras tanto, puedes planear tu viaje sorpresa desde la web.
+		</p>
+		<div class="soon__actions">
+			<Button href={site.appUrl} arrow track={{ event: 'Lead', label: 'modal-app' }}>Planear en la web</Button>
+			<button type="button" class="soon__close" data-soon-close>Cerrar</button>
+		</div>
+	</dialog>
 </section>
+
+<script>
+	const dialog = document.querySelector<HTMLDialogElement>('dialog.soon');
+
+	document.querySelectorAll<HTMLAnchorElement>('[data-app-soon]').forEach((link) => {
+		link.addEventListener('click', (event) => {
+			event.preventDefault();
+			dialog?.showModal();
+		});
+	});
+
+	dialog?.querySelector('[data-soon-close]')?.addEventListener('click', () => dialog.close());
+
+	// Cerrar al hacer clic en el fondo.
+	dialog?.addEventListener('click', (event) => {
+		if (event.target === dialog) dialog.close();
+	});
+</script>
 
 <style>
 	#descargar {
@@ -92,6 +124,60 @@ import Button from './Button.astro';
 
 	.cta__actions {
 		margin-top: 16px;
+	}
+
+	.soon {
+		width: min(440px, calc(100% - 32px));
+		padding: clamp(24px, 5vw, 36px);
+		border: 1px solid var(--line-strong);
+		border-radius: 24px;
+		background: var(--surface);
+		color: var(--text);
+	}
+
+	.soon::backdrop {
+		background: rgb(17 19 22 / 0.72);
+		backdrop-filter: blur(4px);
+	}
+
+	.soon__eyebrow {
+		color: var(--primary);
+		font-weight: 600;
+	}
+
+	.soon__title {
+		margin: 10px 0 12px;
+		font-family: var(--font-display);
+		font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+		line-height: 1.1;
+	}
+
+	.soon__text {
+		color: var(--text-soft);
+	}
+
+	.soon__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+		margin-top: 24px;
+	}
+
+	.soon__close {
+		min-height: 48px;
+		padding: 12px 22px;
+		border: 2px solid var(--line-strong);
+		border-radius: var(--radius-pill);
+		background: transparent;
+		color: var(--text);
+		font: inherit;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.soon__close:hover {
+		border-color: var(--muted-2);
 	}
 
 	@media (max-width: 720px) {

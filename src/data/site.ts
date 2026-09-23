@@ -7,6 +7,8 @@ export const site = {
 		instagram: 'https://www.instagram.com/aitravaagency/',
 		facebook: 'https://www.facebook.com/share/19eZt6jGaa/?mibextid=wwXIfr',
 	},
+	/** Web app donde el usuario planea su viaje. */
+	appUrl: 'https://aitrava-app.juanpza11.workers.dev/',
 	// TODO: reemplazar cuando las apps estén publicadas.
 	stores: {
 		appStore: '#descargar',

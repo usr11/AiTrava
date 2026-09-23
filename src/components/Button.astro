@@ -1,7 +1,9 @@
 ---
 import Icon from './Icon.astro';
 
-interface Props {
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
 	href: string;
 	variant?: 'primary' | 'dark' | 'outline';
 	size?: 'md' | 'lg';
@@ -11,7 +13,7 @@ interface Props {
 	track?: { event: string; label: string; custom?: boolean };
 }
 
-const { href, variant = 'primary', size = 'md', arrow = false, class: className, track } = Astro.props;
+const { href, variant = 'primary', size = 'md', arrow = false, class: className, track, ...rest } = Astro.props;
 ---
 
 <a
@@ -20,6 +22,7 @@ const { href, variant = 'primary', size = 'md', arrow = false, class: className,
 	data-meta-event={track?.event}
 	data-meta-label={track?.label}
 	data-meta-custom={track?.custom ? '' : undefined}
+	{...rest}
 >
 	<slot />
 	{arrow && <Icon name="arrow" size={size === 'lg' ? 20 : 18} strokeWidth={2.2} class="btn__arrow" />}
